@@ -6,7 +6,6 @@ try:
 except ValueError:
     print('You did not provide a number, so I will not calculate the quotient.')
 
-
 try:
     answer = value1 / value2
     print("The answer is", answer) 
