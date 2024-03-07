@@ -1,0 +1,3 @@
+Create a rectangle class with a perimeter method and an area method
+
+The inpt parameters should be base and height.  
