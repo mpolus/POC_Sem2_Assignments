@@ -107,31 +107,31 @@ def check_col():
     third_list = [last_row - 2, last_row - 1, last_row, last_row + 1]
     fourth_list = [last_row - 3, last_row - 2, last_row - 1, last_row]
     if(first_list[0] >= 0 and first_list[0] < 6 and first_list[3] >= 0 and first_list[3] < 6):
-        one = grid[last_col][first_list[0]]
-        two = grid[last_col][first_list[1]]
-        three = grid[last_col][first_list[2]]
-        four = grid[last_col][first_list[3]]
+        one = grid[first_list[0]][last_col]
+        two = grid[first_list[1]][last_col]
+        three = grid[first_list[2]][last_col]
+        four = grid[first_list[3]][last_col]
         if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):
             return True
     if (second_list[0] >= 0 and second_list[0] < 6 and second_list[3] >= 0 and second_list[3] < 6):
-        one = grid[last_col][second_list[0]]
-        two = grid[last_col][second_list[1]]
-        three = grid[last_col][second_list[2]]
-        four = grid[last_col][second_list[3]]
+        one = grid[second_list[0]][last_col]
+        two = grid[second_list[1]][last_col]
+        three = grid[second_list[2]][last_col]
+        four = grid[second_list[3]][last_col]
         if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):
             return True
     if (third_list[0] >= 0 and third_list[0] < 6 and third_list[3] >= 0 and third_list[3] < 6):
-        one = grid[last_col][third_list[0]]
-        two = grid[last_col][third_list[1]]
-        three = grid[last_col][third_list[2]]
-        four = grid[last_col][third_list[3]]
+        one = grid[third_list[0]][last_col]
+        two = grid[third_list[1]][last_col]
+        three = grid[third_list[2]][last_col]
+        four = grid[third_list[3]][last_col]
         if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):
             return True
     if (fourth_list[0] >= 0 and fourth_list[0] < 6 and fourth_list[3] >= 0 and fourth_list[3] < 6):
-        one = grid[last_col][fourth_list[0]]
-        two = grid[last_col][fourth_list[1]]
-        three = grid[last_col][fourth_list[2]]
-        four = grid[last_col][fourth_list[3]]
+        one = grid[fourth_list[0]][last_col]
+        two = grid[fourth_list[1]][last_col]
+        three = grid[fourth_list[2]][last_col]
+        four = grid[fourth_list[3]][last_col]
         if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):
             return True        
     return False  # Actually Implement
@@ -193,7 +193,7 @@ def check_right_diag():
     second_list_col = [last_col + 1, last_col, last_col - 1, last_col - 2]
 
     third_list_row = [last_row - 2, last_row - 1, last_row, last_row + 1]
-    third_list_col = [last_col +  2, last_col + 1, last_col, last_col - 1]
+    third_list_col = [last_col + 2, last_col + 1, last_col, last_col - 1]
 
     fourth_list_row = [last_row - 3, last_row - 2, last_row - 1, last_row]
     fourth_list_col = [last_col + 3, last_col + 2, last_col + 1, last_col]
@@ -228,7 +228,9 @@ def check_right_diag():
             two = grid[fourth_list_row[1]][fourth_list_col[1]]
             three = grid[fourth_list_row[2]][fourth_list_col[2]]
             four = grid[fourth_list_row[3]][fourth_list_col[3]]
-            if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):return False  # Actually Implement
+            if one.__eq__(two) and two.__eq__(three) and three.__eq__(four):
+                return True
+    return False  # Actually Implement
 
 
 def check_draw():
