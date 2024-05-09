@@ -1,4 +1,5 @@
 import tkinter as tk
+from turtle import width
 
 class Game(tk.Frame):
     def __init__(self, master):
@@ -27,29 +28,28 @@ class GameObject(object):
 
 class Ball(GameObject):
     def __init__(self, canvas, x, y):  #(x, y) is the center of the ball
-        #YOUDO-01: create a radius variable for self and set to 10
-        #YOUDO-02: create a direction variable for self and set to [1, -1]
-        #This represents the speed of the ball in the x and y direction.  Example:  [xspeed, yspeed]  
-        #YOUDO-03:  create a speed variable for self and set to 10
-        #YOUDO-04:  create an x1 variable and set to x - self's radius
-        #YOUDO-05:  create an y1 variable and set to y - self's radius
-        #YOUDO-06:  create an x2 variable and set to x + self's radius
-        #YOUDO-07:  create an y2 variable and set to y + self's radius  
-        #YOUDO-08:  create a color variable and set to "white"
+        self.radius = 10
+        self.direction = [1, -1]
+        self.speed = 10
+        x1 = x - self.radius
+        y1 = y - self.radius
+        x2 = x + self.radius
+        y2 = y + self.radius
+        color = "white"
         item = canvas.create_oval(x1, y1, x2, y2, fill=color)
         super(Ball, self).__init__(canvas, item)
 
 class Paddle(GameObject):
     def __init__(self, canvas, x, y):  #(x, y) is the center of the paddle
-        #YOUDO-09:  create a width variable for self and set to 80
-        #YOUDO-10:  create a height variable for self and set to 10
-        #YOUDO-11:  create a ball variable for self and set to None
-        #YOUDO-12:  create an x1 variable and set to x - self's width / 2
-        #YOUDO-13:  create an y1 variable and set to y - self's height / 2
-        #YOUDO-14:  create an x2 variable and set to x + self's width / 2
-        #YOUDO-15:  create an y2 variable and set to y + self's height / 2
-        #YOUDO-16:  create a color variable and set to "blue"
-        #YOUDO-17:  use create_rectangle on canvas to create an item variable with x1, y1, x2, y2, color
+        self.width = 80
+        self.height = 10
+        self.ball = None
+        x1 = x - self.width / 2
+        y1 = y - self.height / 2
+        x2 = x + self.width / 2
+        y2 = y + self.height / 2
+        color = "blue"
+        item = canvas.create_rectangle(x1, y1, x2, y2, fill=color)
         super(Paddle, self).__init__(canvas, item)
 
     def set_ball(self, ball):
@@ -68,17 +68,31 @@ class Paddle(GameObject):
             self.ball.move(offset, 0)
 
 class Brick(GameObject):
-    COLORS = {1 : "#999999", 2 : "#555555", }
+    COLORS = {1 : "#999999", 2 : "#555555", 3 : "#222222"}
 
     def __init__(self, canvas, x, y, hits):
-        width.self = 75
-        hright.self = 20
-        hits.self = hits
+        self.width = 75
+        self.height = 20
+        self.hits = hits
+        color = Brick.COLORS[hits]
+        x1 = x - self.width / 2
+        y1 = y - self.height / 2
+        x2 = x + self.width / 2
+        y2 = y + self.height / 2
+        item = canvas.create_rectangle(x1, y1, x2, y2, color, tags="brick")       
+        super(Brick, self).__init__(canvas, item)
 
+    def hit(self):
+        self.hits = self.hits - 1
+        if self.hits == 0:
+            return self.delete
+        else:
+            self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
 
-
-        super().__init__(canvas, item)
-
+        #YOUDO-26:  subtract one from self.hits
+        #YOUDO-27:  check if self.hits is equal to 0.  If it is call self.delete().  If not 
+        #YOUDO-27-part2:  call self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
+        pass #YOUDO-28:  Remove this pass
 
 if __name__ == "__main__":    
     root = tk.Tk()
