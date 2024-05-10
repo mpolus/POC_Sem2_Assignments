@@ -85,7 +85,7 @@ class Brick(GameObject):
     def hit(self):
         self.hits = self.hits - 1
         if self.hits == 0:
-            return self.delete
+            self.delete()
         else:
             self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
 
