@@ -123,17 +123,17 @@ class Ball(GameObject):
             self.direction[1] *= -1
         x = self.direction[0] * self.speed
         y = self.direction[1] * self.speed
+        self.ball.move(self.item)
         #YOUDO_30:  call the move method for self passing in the appropriate arguments
 
     def collide(self, game_objects):
-        #YOUDO-30:  same logic as YOUDO-28
-        #YOUDO-31:  create a variable x for the center of the ball.  so you'll need coords[0] and coords[2] and math midpoint stuff :)
+        coords = self.get_position()
+        x = (coords[0] + coords[2]) / 2
         if len(game_objects) > 1:
-            #YOUDO-32:  flip the direction like we did in update for the y direction (index 1)
-            pass  #YOUDO-33:  remove this when done
+            self.direction[1] *= -1
         elif len(game_objects) == 1:
             game_object = game_objects[0]
-            #YOUDO-34:  create a coords variable for game_object from get_position like before
+            # coords = self.get_position() YOUDO-34:  create a coords variable for game_object from get_position like before
             if x > coords[2]:
                 self.direction[0] = 1
             elif x < coords[0]:
@@ -196,9 +196,7 @@ class Brick(GameObject):
         else:
             self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
 
-        #YOUDO-26:  subtract one from self.hits
-        #YOUDO-27:  check if self.hits is equal to 0.  If it is call self.delete().  If not 
-        #YOUDO-27-part2:  call self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
+       
         
 
 if __name__ == "__main__":    

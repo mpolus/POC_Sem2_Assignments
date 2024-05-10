@@ -89,11 +89,7 @@ class Brick(GameObject):
         else:
             self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
 
-        #YOUDO-26:  subtract one from self.hits
-        #YOUDO-27:  check if self.hits is equal to 0.  If it is call self.delete().  If not 
-        #YOUDO-27-part2:  call self.canvas.itemconfig(self.item, fill=Brick.COLORS[self.hits])
-        pass #YOUDO-28:  Remove this pass
-
+       
 if __name__ == "__main__":    
     root = tk.Tk()
     game = Game(root)
