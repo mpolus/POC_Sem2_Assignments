@@ -64,10 +64,10 @@ class Game(tk.Frame):
         self.game_loop()
 
     def game_loop(self):
-        #YOUDO-36:  call self's check_collisions method
+        self.check_collisions()
         num_bricks = len(self.canvas.find_withtag("brick"))
         if num_bricks == 0:
-            #YOUOD_37:  set self's ball's speed variable to None
+            self.ball.speed = None
             self.draw_text(300, 200, "You win!")
         elif self.ball.get_position()[3] >= self.height:
             self.ball.speed = None
@@ -81,7 +81,7 @@ class Game(tk.Frame):
             self.after(50, self.game_loop())
 
     def check_collisions(self):
-        #YOUDO_38:  get the ball's coords from self.get_position and store in ball_coords
+        ball_coords = self.ball.get_position()
         items = self.canvas.find_overlapping(*ball_coords)
         objects = [self.items[x] for x in items if x in self.items]
         self.ball.collide(objects)
@@ -123,8 +123,7 @@ class Ball(GameObject):
             self.direction[1] *= -1
         x = self.direction[0] * self.speed
         y = self.direction[1] * self.speed
-        self.ball.move(self.item)
-        #YOUDO_30:  call the move method for self passing in the appropriate arguments
+        self.move(x, y)
 
     def collide(self, game_objects):
         coords = self.get_position()
@@ -133,7 +132,7 @@ class Ball(GameObject):
             self.direction[1] *= -1
         elif len(game_objects) == 1:
             game_object = game_objects[0]
-            # coords = self.get_position() YOUDO-34:  create a coords variable for game_object from get_position like before
+            coords = game_object.get_position()
             if x > coords[2]:
                 self.direction[0] = 1
             elif x < coords[0]:
@@ -190,7 +189,7 @@ class Brick(GameObject):
         super(Brick, self).__init__(canvas, item)
 
     def hit(self):
-        self.hits = self.hits - 1
+        self.hits -= 1
         if self.hits == 0:
             self.delete()
         else:
