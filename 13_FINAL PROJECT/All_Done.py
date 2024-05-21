@@ -78,7 +78,7 @@ class Game(tk.Frame):
                 self.after(1000, self.setup_game)
         else:
             self.ball.update()
-            self.after(50, self.game_loop())
+            self.after(50, self.game_loop)
 
     def check_collisions(self):
         ball_coords = self.ball.get_position()
@@ -163,7 +163,7 @@ class Paddle(GameObject):
 
     def move(self, offset):
         coords = self.get_position()
-        width = self.canvas.winfo.width()
+        width = self.canvas.winfo_width()
         x1 = coords[0]
         y1 = coords[1]
         x2 = coords[2]
@@ -185,7 +185,7 @@ class Brick(GameObject):
         y1 = y - self.height / 2
         x2 = x + self.width / 2
         y2 = y + self.height / 2
-        item = canvas.create_rectangle(x1, y1, x2, y2, color, tags="brick")       
+        item = canvas.create_rectangle(x1, y1, x2, y2, fill=color, tags="brick")       
         super(Brick, self).__init__(canvas, item)
 
     def hit(self):
